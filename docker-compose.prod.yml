@@ -1,0 +1,23 @@
+services:
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - node-default
+    volumes:
+      - node-data:/app/data
+    environment:
+      - ENV_1=example
+    tty: true
+    container_name: code-node-tfd-prod
+  node-default:
+    image: node:latest
+    volumes:
+      - node-data:/app/data
+    environment:
+      - ENV_1=example
+    tty: true
+    container_name: code-node-tfd-default-prod
+volumes:
+  node-data:
